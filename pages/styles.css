@@ -1,0 +1,85 @@
+/* pre-html styling stuff */
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    border: 1px dashed black
+}
+:root{
+    font-family: "JetBrains Mono", Inter, system-ui, sans-serif;
+    --bg: #fff;
+    --bg_header: #eeee;
+    --fg: #111;
+    --muted: #666;
+    --surface: #fff;
+    --border: #e5e5e5;
+    --brand: #0d6efd;
+    --t0: clamp(.95rem, .38vw+ .88rem, 1.05rem);
+    --t1: clamp(1.1rem, .6vw+ 1rem, 1.35rem);
+    --t2: clamp(1.35rem, 1vw+ 1rem, 1.8rem);
+    --gap: clamp(.75rem, 1.5vw, 1.25rem);
+    --radius: 1rem;
+    --bp-md: 48rem;
+    --bp-lg: 64rem;
+    --bp-xl: 80rem;
+}
+html,
+body{
+    height: 100%;
+}
+body{
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--fg);
+    font-size: 16px;
+}
+
+/* Navigation Header */
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.active{
+    text-decoration: none;
+    color: orange;
+}
+
+
+/* Home Page */
+.home{
+    display: grid;
+
+}
+
+
+/* Post Page */
+.post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: .5rem;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.48);
+}
+
+.post_img{
+    border: 1px solid black;
+    border-radius: .5rem;
+    aspect-ratio: 1/1.5;
+    width: 20rem;
+    height: auto;
+}
+
+.container{
+    display: grid;
+    gap: 3rem;
+}
+
+/* contact page */
+.contact_form{
+    display: grid;
+    gap: 3rem;
+}
