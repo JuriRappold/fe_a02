@@ -67,3 +67,7 @@ Assignment 02 for the Frontend Development course; html, css, and javascript
      - general
      - html 
    - added `.gitignore` file for `.idea/` directory
+2. Juri: 11.10.2025/11:40, html & css styling
+   - added css styling to the pages
+   - added some static html here and there
+   - a lot of the styling comes from the last examination :)

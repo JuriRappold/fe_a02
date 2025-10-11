@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <header class="header">
+    <header class="header safe">
         <div class="brand">
             <h1><a href="home.html">Brand Name</a></h1>
         </div>
@@ -20,14 +20,32 @@
         </nav>
     </header>
 
-    <main class="main contact">
+    <main class="main contact safe">
+        <h2 id="contact_header">Contact Us!!</h2>
         <form class="contact_form">
-            <label for="form name" class="contact_label">Name: <input type="text" id="form name" class="contact_input"></label>
-            <label for="form email" class="contact_label">Email: <input type="email" id="form email" class="contact_input"></label>
-            <label for="form check" class="contact_label">Confirm to Send: <input type="checkbox" id="form check" class="contact_input"></label>
-            <input type="submit" value="Send" class="form submit">
+            <fieldset id="contact_info">
+                <legend>Your Information</legend>
+                <label for="form_name" class="contact_label">Name: <input type="text" id="form_name" class="contact_input"></label>
+                <label for="form_email" class="contact_label">Email: <input type="email" id="form_email" class="contact_input"></label>
+            </fieldset>
+
+            <fieldset id="content">
+                <legend> <label for="info">What do you want to tell us?</label></legend>
+               <input id="info" type="text">
+            </fieldset>
+
+            <fieldset id="submit_check">
+                <legend>Submission</legend>
+                <label for="form_check" class="contact_label">Confirm to Send: <input type="checkbox" id="form_check" class="contact_input"></label>
+                <input type="submit" value="Send" class="form_submit">
+            </fieldset>
         </form>
     </main>
+
+    <footer class="site_footer">
+        <p>&copy; Social Media</p>
+        <p><a href="contact.html">email@address.domain</a></p>
+    </footer>
 </div>
 </body>
 </html>

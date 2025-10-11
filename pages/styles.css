@@ -3,7 +3,7 @@
 *::before,
 *::after{
     box-sizing: border-box;
-    border: 1px dashed black
+    /*border: 1px dashed black*/
 }
 :root{
     font-family: "JetBrains Mono", Inter, system-ui, sans-serif;
@@ -34,10 +34,40 @@ body{
     font-size: 16px;
 }
 
+.wrapper{
+    min-block-size: 100dvh; /* dynamic view height */
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background-color: var(--bg);
+}
+.safe{
+    padding-inline: max(var(--gap), env(safe-area-inset-left, 0px));
+    padding-inline-end: max(var(--gap), env(safe-area-inset-right, 0px));
+}
+.safe{
+    padding-block: max(calc(var(--gap)*0.9, env(safe-area-inset-top,0px))) max(calc(var(--gap), env(safe-area-inset-bottom, 0+x)));
+}
+
+/* anchor tag styling */
+a {
+    text-decoration: none;
+    color: black;
+    border-radius: .5rem;
+    padding: .25rem;
+}
+
+a:hover {
+    background-color: #6666ee66;
+}
+
+
 /* Navigation Header */
 .header{
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid black;
+    margin-bottom: 2rem;
+    background-color: var(--bg_header);
 }
 
 .active{
@@ -45,11 +75,14 @@ body{
     color: orange;
 }
 
+.navigation ul{
+    list-style: none;
+}
+
 
 /* Home Page */
 .home{
     display: grid;
-
 }
 
 
@@ -68,7 +101,7 @@ body{
 .post_img{
     border: 1px solid black;
     border-radius: .5rem;
-    aspect-ratio: 1/1.5;
+    aspect-ratio: 1.5/1;
     width: 20rem;
     height: auto;
 }
@@ -79,7 +112,56 @@ body{
 }
 
 /* contact page */
+.contact{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+
 .contact_form{
     display: grid;
     gap: 3rem;
+    padding: .5rem;
+    border: 1px solid grey;
+    /*margin: 2rem;*/
+}
+
+fieldset{
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    justify-content: space-evenly;
+}
+
+#contact_header{
+    justify-self: center;
+    align-self: center;
+}
+
+
+/* Site footer */
+.site_footer{
+    background-color: var(--bg_header);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-top: 1px solid black;
+    color: var(--muted);
+    margin-top: 2rem;
+}
+
+/* Media queries/Breakpoints */
+
+@media (min-width: 32rem) {
+    .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 64rem) {
+    .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
