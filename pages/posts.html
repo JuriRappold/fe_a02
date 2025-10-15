@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Posts</title>
-    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="static_styles.css" type="text/css">
+    <link rel="stylesheet" href="dynamic_styles.css" type="text/css">
+    <script src="../DOM%20manipulation/html_factories.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -21,87 +23,14 @@
     </header>
 
     <main class="main posts safe">
-        <section class="container">
-            <article class="post">
-                <h2>Title Post</h2>
-                <div class="body">
-                    <img src="../assets/floatyLap.jpg" alt="Floaty Laptop" loading="lazy" class="post_img">
-                </div>
-                <p class="usr_name">Username</p>
-                <p class="tags"></p>
-                <div class="reaction_cnt"></div>
-            </article>
+        <section class="container" id="container">
 
-            <article class="post">
-                <h2>Title Post</h2>
-                <div class="body">
-                    <img src="../assets/floatyLap.jpg" alt="Floaty Laptop" loading="lazy" class="post_img">
-                </div>
-                <p class="usr_name">Username</p>
-                <p class="tags"></p>
-                <div class="reaction_cnt"></div>
-            </article>
-
-            <article class="post">
-                <h2>Title Post</h2>
-                <div class="body">
-                    <img src="../assets/floatyLap.jpg" alt="Floaty Laptop" loading="lazy" class="post_img">
-                </div>
-                <p class="usr_name">Username</p>
-                <p class="tags"></p>
-                <div class="reaction_cnt"></div>
-            </article>
-
-            <article class="post">
-                <h2>Title Post</h2>
-                <div class="body">
-                    <img src="../assets/floatyLap.jpg" alt="Floaty Laptop" loading="lazy" class="post_img">
-                </div>
-                <p class="usr_name">Username</p>
-                <p class="tags"></p>
-                <div class="reaction_cnt"></div>
-            </article>
-
-            <article class="post">
-                <h2>Title Post</h2>
-                <div class="body">
-                    <img src="../assets/floatyLap.jpg" alt="Floaty Laptop" loading="lazy" class="post_img">
-                </div>
-                <p class="usr_name">Username</p>
-                <p class="tags"></p>
-                <div class="reaction_cnt"></div>
-            </article>
-
-            <article class="post">
-                <h2>Title Post</h2>
-                <div class="body">
-                    <img src="../assets/floatyLap.jpg" alt="Floaty Laptop" loading="lazy" class="post_img">
-                </div>
-                <p class="usr_name">Username</p>
-                <p class="tags"></p>
-                <div class="reaction_cnt"></div>
-            </article>
-
-            <article class="post">
-                <h2>Title Post</h2>
-                <div class="body">
-                    <img src="../assets/floatyLap.jpg" alt="Floaty Laptop" loading="lazy" class="post_img">
-                </div>
-                <p class="usr_name">Username</p>
-                <p class="tags"></p>
-                <div class="reaction_cnt"></div>
-            </article>
-
-            <article class="post">
-                <h2>Title Post</h2>
-                <div class="body">
-                    <img src="../assets/floatyLap.jpg" alt="Floaty Laptop" loading="lazy" class="post_img">
-                </div>
-                <p class="usr_name">Username</p>
-                <p class="tags"></p>
-                <div class="reaction_cnt"></div>
-            </article>
         </section>
+        <button id="fetchPosts">Fetch Posts</button>
+        <pre id="cunt"></pre>
+
+        <button id="testing">Fetch Users</button>
+        <pre id="testing_pre"></pre>
     </main>
 
     <footer class="site_footer">
