@@ -31,7 +31,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         clear(postContainer);
         postList = [];
         skip = 0;
-        postList = await fetchPost(postList, skip);//API.fetchPosts(postList, skip)
+        //postList = await fetchPost(postList, skip);//API.fetchPosts(postList, skip)
+        await API.fetchPosts(postList, skip);//returns obj list
         DomManipulation.renderPosts(postList, postContainer,skip)
         skip = 10;
         //console.log(postList);
@@ -51,7 +52,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     fetchPosts.onclick = async () => {
         console.log(skip);
         //await API.fetchPosts(postList, skip);
-        fetchPost(postList, skip)
+        //fetchPost(postList, skip)
+        await API.fetchPosts(postList, skip);
         DomManipulation.renderPosts(postList, postContainer, skip);
         skip+=10;
         console.log(skip);
