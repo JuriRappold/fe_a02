@@ -27,7 +27,7 @@ export default class DomManipulation{
         comments.innerText = "COMMENTS COMING SOON!!!";
 
         //assigning value to html elements
-        usrName.innerText = post.user;//name;//to be switched w/ actual usrname
+        usrName.innerText = post.user;//`${post.user.firstName} ${post.user.lastName}`//post.user;//name;//to be switched w/ actual usrname
         title.innerText = post.title;
         body.innerText = post.body;
         reaction.innerText = `Likes: ${post.reaction["likes"]}; Dislikes: ${post.reaction["dislikes"]};`;

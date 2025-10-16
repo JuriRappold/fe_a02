@@ -15,7 +15,7 @@ export default class API{
                 })
                 .then(data => {
                     data.posts.forEach(post=>{
-                        list.push(post);//
+                        list.push(Factory.post(post));//
                     });
                 })
         }

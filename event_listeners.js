@@ -13,15 +13,16 @@ const fetchPosts = byID("fetchPosts");
 let postList = []
 let skip = 0;
 
-async function fetchPost(list=[], skip = 0){
+async function fetchPost(list=[], skip = 0){//this is taking waaay too long
     await API.fetchPosts(list, skip)//returns json in list
-    // for (let post of list) { //use for-in loop
-    //     //fetch user Object
-    //     const userObj = await API.fetchSpecificUser(post.post.userId);
-    //     //create postObj
-    //      post = Factory.post(post.post, userObj);
-    //
-    // }
+    for (let post of list) { //use for-in loop
+        //fetch user Object
+        const userObj = await API.fetchSpecificUser(post.post.user);
+        //create postObj
+        post.post.user=userObj.user.name;
+        //console.log(post);
+        //console.log(userObj);
+    }
     return list;
 }
 
@@ -30,10 +31,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         clear(postContainer);
         postList = [];
         skip = 0;
-        postList = await API.fetchPosts(postList, skip)//await fetchPost(postList, skip);
-        //DomManipulation.renderPosts(postList, postContainer,skip)
-        //skip = 10;
-        console.log(postList);
+        postList = await fetchPost(postList, skip);//API.fetchPosts(postList, skip)
+        DomManipulation.renderPosts(postList, postContainer,skip)
+        skip = 10;
+        //console.log(postList);
     }
 
     postContainer.onclick = async (event) => {
@@ -49,7 +50,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     fetchPosts.onclick = async () => {
         console.log(skip);
-        await API.fetchPosts(postList, skip);
+        //await API.fetchPosts(postList, skip);
+        fetchPost(postList, skip)
         DomManipulation.renderPosts(postList, postContainer, skip);
         skip+=10;
         console.log(skip);
