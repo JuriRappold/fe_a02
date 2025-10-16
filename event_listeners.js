@@ -33,6 +33,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         skip = 0;
         //postList = await fetchPost(postList, skip);//API.fetchPosts(postList, skip)
         await API.fetchPosts(postList, skip);//returns obj list
+        for (const element of postList) {//makes load time longer; idk why
+          element.post.user = await API.fetchSpecificUser(element.post.user);
+        }
         DomManipulation.renderPosts(postList, postContainer,skip)
         skip = 10;
         //console.log(postList);

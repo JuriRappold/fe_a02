@@ -27,7 +27,8 @@ export default class DomManipulation{
         comments.innerText = "COMMENTS COMING SOON!!!";
 
         //assigning value to html elements
-        usrName.innerText = post.user;//`${post.user.firstName} ${post.user.lastName}`//post.user;//name;//to be switched w/ actual usrname
+        //console.log(post.user.user.name);
+        usrName.innerText = post.user.user.name;//`${post.user.firstName} ${post.user.lastName}`//post.user;//name;//to be switched w/ actual usrname
         title.innerText = post.title;
         body.innerText = post.body;
         reaction.innerText = `Likes: ${post.reaction["likes"]}; Dislikes: ${post.reaction["dislikes"]};`;
@@ -68,8 +69,8 @@ export default class DomManipulation{
         for(let l = skip; l<list.length;l++){
             temp.push(list[l]);
         }
-        temp.forEach(post => {
-            fragment.appendChild(this.postHTML(post));
+        temp.forEach(element => {
+            fragment.appendChild(this.postHTML(element));
         })
 
         container.appendChild(fragment)
