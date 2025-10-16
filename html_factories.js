@@ -8,7 +8,10 @@
 //     <p class="tags"></p>
 //     <div class="reaction_cnt"></div>
 // </article>
-const API_posts = `https://dummyjson.com/posts?limit=10`;
+import API from "./api_calls.js";
+
+let skip = 0;
+
 const API_Users = `https://dummyjson.com/users?limit=5&select=id,eyeColor,firstName,lastName,email,address`
 const byID = (id) => document.getElementById(id);
 const show = (el, ...things) => {
@@ -34,7 +37,7 @@ function createPost(posti){
         }
     }
 }
-function createPostHTML(post){
+function createPostHTML(post, name){
     //creating html elements & assigning classes
     const article = createEl("article");
     article.classList.toggle("post");//adds class "post" to article
@@ -58,7 +61,7 @@ function createPostHTML(post){
     comments.innerText = "COMMENTS COMING SOON!!!";
 
     //assigning value to html elements
-    usrName.innerText = post.userID;//to be switched w/ actual usrname
+    usrName.innerText = post.userID;//name;//to be switched w/ actual usrname
     title.innerText = post.title;
     body.innerText = post.body;
     reaction.innerText = `Likes: ${post.reaction["likes"]}; Dislikes: ${post.reaction["dislikes"]};`;
@@ -76,6 +79,48 @@ function createPostHTML(post){
 
     return article;
 }
+async function fetch_posts(){
+    const postList = []
+    const API_posts = `https://dummyjson.com/posts?limit=10&skip=${skip}`;
+    await fetch(API_posts)
+            .then(response => {
+                if (!response.ok){
+                    throw new Error(`HTTP Error! Status: ${response.status}`)
+                }
+                return response.json();
+            })
+            .then(data => {
+                //show(log, "fetched successfully\n");
+                data.posts.forEach((post) => {
+                    const p = createPost(post);
+                    postList.push(p);
+                });
+                //console.log(data)
+                //show(log, postList, "\nEnd")
+
+            })
+            .catch( error => {
+                    show(log, `Fetch failed: ${error}`);
+                })
+    return postList
+}
+async function makePosts(){
+    let postList = [];
+    let userList = []
+    postList = await fetch_posts();
+    // for (const post of postList) {
+    //     userList.push(await fetchSpecificUser(post.post.userID));
+    // }
+    //console.log(postList);
+    const container = byID("container")
+    const fragment = document.createDocumentFragment();
+
+    postList.forEach(post => {
+        fragment.appendChild(createPostHTML(post.post));//each element in postList has an id of post besides the index
+    });
+    container.appendChild(fragment);
+    console.log(skip);
+}
 
 function createUser(user){
     return {
@@ -92,7 +137,7 @@ function createUser(user){
     // }
 }
 
-function fetchSpecificUser(userId){
+async function fetchSpecificUser(userId){
     let specUser = "";
     const specificURL = `https://dummyjson.com/users/${userId}?&select=id,eyeColor,firstName,lastName,email,address`;
     fetch(specificURL)
@@ -105,78 +150,72 @@ function fetchSpecificUser(userId){
         .then(data =>{
             console.log("fetch succesful")
             specUser = createUser(data);
-            //console.log(data);
+            console.log(data);
             console.log(specUser);
-            return specUser
         })
         .catch( error => {
                 console.log(`Fetch of specific User failed: ${error}`);
         })
-
+    return specUser;
 
 }
+
+function createModal(userId){//later add usr object as parameter
+    const modal = createEl("div");
+    modal.classList.toggle("modal");
+    const closeBtn = createEl("button");
+    const header = createEl("h3");
+    const body = createEl("p");
+
+    closeBtn.innerText = "X";
+    header.innerText = userId;
+    body.innerText = "User information"
+
+    modal.appendChild(closeBtn);
+    modal.appendChild(header);
+    modal.appendChild(body);
+
+    return modal;
+}
+
+function cDiv(userList){
+    userList = document.querySelectorAll(".usrName");
+    userList.forEach((usr) => {
+    usr.onclick = () =>{
+        let temp = Number(byID("counter").innerText);
+        temp+=1;
+        byID("counter").innerText = temp;
+        }
+    })
+}
+
+
+
+
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    API.fetchSpecificUser(10);
     //temp logic, will see how temporary it is lol
-    const postList = [];
-    const userList = [];
-    byID("fetchPosts").onclick = async () => {
-    const log = byID("cunt");
-    clear(log);
+    //
+    // let userList = [];
+    // window.onload = async () => {
+    //     await makePosts();
+    //     cDiv(userList);
+    //     skip+=10;
+    // }
+    //
+    // byID("fetchPosts").onclick = async () => {
+    //     await makePosts();
+    //     cDiv(userList);
+    //     skip+=10;
+    // }
+    // //const usrNames = document.querySelectorAll(".usrName")//maybe .post .usrName?
+    //
+    //
+    //
+    //
+    //
 
-    fetch(API_posts)
-        .then(response => {
-            if (!response.ok){
-                throw new Error(`HTTP Error! Status: ${response.status}`)
-            }
-            return response.json();
-        })
-        .then(data => {
-            show(log, "fetched successfully\n");
-            data.posts.forEach((post) => {
-                const p = createPost(post);
-                postList.push(p);
-            });
-
-            const container = byID("container")
-            const fragment = document.createDocumentFragment();
-
-            postList.forEach(post => {
-                fragment.appendChild(createPostHTML(post.post));//each element in postList has an id of post besides the index
-            });
-
-            container.appendChild(fragment);
-            //show(log, postList, "\nEnd")
-        })
-        .catch( error => {
-                show(log, `Fetch failed: ${error}`);
-            })
-}
-
-    byID("testing").onclick = async () => {
-        const testing = byID("testing_pre");
-        fetch(API_Users)
-        .then(response => {
-            if (!response.ok){
-                throw new Error(`HTTP Error! Status: ${response.status}`)
-            }
-            return response.json();
-        })
-        .then(data => {
-            show(testing, "fetched successfully\n");
-            data.users.forEach((user) => {
-                const u = createUser(user);
-                console.log(u)
-                userList.push(u);
-            });
-            show(testing, userList, "\nEnd")
-            show(testing,"Specific User:\n",fetchSpecificUser(10));
-
-        })
-        .catch( error => {
-                show(testing, `Fetch failed: ${error}`);
-            })
-
-    }
 });
