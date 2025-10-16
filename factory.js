@@ -1,5 +1,7 @@
+//import API from "./api_calls.js";
+
 export default class Factory{
-    static post(posti){//ignore useage atm
+    static post(posti, user){//ignore useage atm
         return {
             post: {
                 title: posti.title,
@@ -7,7 +9,7 @@ export default class Factory{
                 body: posti.body,
                 tags: posti.tags,
                 reaction: posti.reactions,
-                userID: posti.userId,
+                user: user
             }
         }
     }

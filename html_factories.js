@@ -9,6 +9,7 @@
 //     <div class="reaction_cnt"></div>
 // </article>
 import API from "./api_calls.js";
+import DomManipulation from "./dom.js";
 
 let skip = 0;
 
@@ -195,8 +196,23 @@ function cDiv(userList){
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    API.fetchSpecificUser(10);
+document.addEventListener("DOMContentLoaded", async () => {
+    window.onload = async () => {
+        const posts = await API.fetchPosts();//no parameters needed on first fetch
+        const fragment = document.createDocumentFragment();
+        posts.forEach(post =>{
+            fragment.appendChild(DomManipulation.postHTML(post.post))
+            //console.log(post);
+        })
+        const container = byID("container")
+        container.appendChild(fragment)
+
+    }
+    // let list = []
+    // list = await API.fetchPosts(list, 1)
+    // let user = await API.fetchSpecificUser(10);
+    // console.log(user);
+    // console.log(list);
     //temp logic, will see how temporary it is lol
     //
     // let userList = [];
