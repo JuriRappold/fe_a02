@@ -22,4 +22,10 @@ returns:
 ```json
 
 ```
+
+# Links
+*general links limit=10*<br>
+[Posts](https://dummyjson.com/posts?limit=10)<br>
+[Comments](https://dummyjson.com/comments?limit=10)<br>
+[Users](https://dummyjson.com/users?limit=10)<br>
     

@@ -13,11 +13,13 @@ export default class Factory{
             }
         }
     }
+
     static user(user){
         return {
             user: {
                 id: user.id,
                 name: `${user.firstName} ${user.lastName}`,
+                username: user.username,
                 email: user.email,
                 address: `${user.address.address}, ${user.address.city} ${user.address.postalCode}, ${user.address.state} ${user.address.country}`,
                 eyeColor: user.eyeColor,
