@@ -34,8 +34,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         postList = [];
         skip = 0;
         await API.fetchPosts(postList, skip, userList);//returns post & user obj
+        for (const element of postList){
+            //userList.push(await API.fetchSpecificUser(element.post.user));
+            element.post.user = await API.fetchSpecificUser(element.post.user);
+            //console.log(element.post.user);
+            //commentsList.push(await API.fetchPostComments(element.post.id));
+             await API.fetchPostComments(element.post.comments, element.post.id);
+            // console.log(element.post.id);
+            //console.log(element.post.comments);
+        }
+        //console.log(commentsList.length);
+
+
         DomManipulation.renderPosts(postList, postContainer, skip)
         skip = 10;
+        //
+        // await API.fetchPostComments(commentsList, 1);
+        // const comm = createEl("div");
+        // commentsList.forEach(element => {
+        //     comm.appendChild(DomManipulation.commentHTML(element));
+        // })
+        // byID("cunt").appendChild(comm);
 
     }
 

@@ -10,6 +10,7 @@ export default class Factory{
                 tags: posti.tags,
                 reaction: posti.reactions,
                 user: posti.userId,
+                comments: [],
             }
         }
     }
@@ -23,6 +24,18 @@ export default class Factory{
                 email: user.email,
                 address: `${user.address.address}, ${user.address.city} ${user.address.postalCode}, ${user.address.state} ${user.address.country}`,
                 eyeColor: user.eyeColor,
+            }
+        }
+    }
+
+    static comment(comment){
+        return {
+            comment: {
+                id: comment.id,
+                postId: comment.postId,
+                body: comment.body,
+                likes: comment.likes,
+                user: comment.user,
             }
         }
     }

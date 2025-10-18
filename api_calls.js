@@ -14,13 +14,20 @@ export default class API{
                     return response.json();
                 })
                 .then(async (data) => {
-                    for (const element of data.posts) {
-                        let postElement = Factory.post(element)
-                        let userPost = await this.fetchSpecificUser(element.userId)
-                        userIdList.push(userPost);
-                        postElement.post.user = userPost
-                        list.push(postElement);//element obj
-                    }
+                    // for (const element of data.posts) {
+                    //     let postElement = Factory.post(element)
+                    //     let userPost = await this.fetchSpecificUser(element.userId)
+                    //     userIdList.push(userPost);
+                    //     postElement.post.user = userPost
+                    //     list.push(postElement);//element obj
+                    // }
+                    data.posts.forEach(element =>{
+                        list.push(Factory.post(element));
+                        //userIdList.push(element.userId);
+                    })
+                })
+                .catch(err => {
+                    console.error(err);
                 })
         }
         //console.log(list);
@@ -43,8 +50,34 @@ export default class API{
                     //console.log(data)
                     usr = Factory.user(data);
                 })
+                .catch(err => {
+                    console.error(err);
+                })
         }
         return usr;
+    }
+
+    //call to fetch comments of a post
+    static async fetchPostComments(list = [], postId){
+        const API_comments = `https://dummyjson.com/posts/${encodeURIComponent(postId)}/comments`;
+        await fetch(API_comments)
+            .then(response => {
+                if(!response.ok){
+                    throw new Error(`HTTP Error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // for (const element in data.comments){
+                //     list.push(Factory.comment(element));
+                // }
+                data.comments.forEach(element => {
+                    list.push(Factory.comment(element));
+                })
+            })
+            .catch(err => {
+                console.error(err);
+            });
     }
 
 }

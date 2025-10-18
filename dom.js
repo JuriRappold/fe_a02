@@ -2,6 +2,7 @@ export default class DomManipulation{
     static createEl(el){
         return document.createElement(el);
     }
+
     static postHTML(post){
         post = post.post;
         //creating html elements & assigning classes
@@ -22,9 +23,17 @@ export default class DomManipulation{
         const postId = this.createEl("div")
         postId.classList.toggle("postID");
 
-        const comments = this.createEl("div")
-        comments.classList.toggle("commentSection")
-        comments.innerText = "COMMENTS COMING SOON!!!";
+        const commentSection = this.createEl("div")
+        commentSection.classList.toggle("commentSection")
+        if(post.comments){
+            post.comments.forEach(element => {
+            commentSection.appendChild(this.commentHTML(element));
+            })
+        } else{
+            commentSection.innerText = "No comments Yet! Be the first to comment!"
+        }
+
+
 
         //assigning value to html elements
         //console.log(post.user.user.name);
@@ -42,7 +51,7 @@ export default class DomManipulation{
         article.appendChild(title);
         article.appendChild(body);
         article.appendChild(div);
-        article.appendChild(comments);
+        article.appendChild(commentSection);
 
         return article;
     }
@@ -61,6 +70,26 @@ export default class DomManipulation{
         modally.appendChild(body);
 
         return modally;
+    }
+
+    static commentHTML(comment){
+        comment = comment.comment;
+        const div = this.createEl("p")
+        div.classList.toggle("comment");
+        const username = this.createEl("span");
+        username.classList.toggle("usrName");
+        const body = this.createEl("div");
+        const likes = this.createEl("div");
+
+        username.innerText = comment.user.username;
+        body.innerText = comment.body;
+        likes.innerText = `Likes: ${comment.likes}`;
+
+        div.appendChild(username);
+        div.appendChild(body);
+        div.appendChild(likes);
+
+        return div;
     }
 
     static renderPosts(list, container, skip){//direct DOM manipulation; no return

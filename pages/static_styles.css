@@ -110,6 +110,10 @@ a:hover {
     display: grid;
     gap: 3rem;
 }
+
+.comment{
+    border: 1px solid purple;
+}
 /* Post Page: Modal */
 #modal{
     position: fixed;
