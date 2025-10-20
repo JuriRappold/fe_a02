@@ -29,34 +29,17 @@ async function fetchPost(list=[], skip = 0){//this is taking waaay too long
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    window.onload = async () => {
-        clear(postContainer);
-        postList = [];
-        skip = 0;
-        await API.fetchPosts(postList, skip, userList);//returns post & user obj
-        for (const element of postList){
-            //userList.push(await API.fetchSpecificUser(element.post.user));
-            element.post.user = await API.fetchSpecificUser(element.post.user);
-            //console.log(element.post.user);
-            //commentsList.push(await API.fetchPostComments(element.post.id));
-             await API.fetchPostComments(element.post.comments, element.post.id);
-            // console.log(element.post.id);
-            //console.log(element.post.comments);
-        }
-        //console.log(commentsList.length);
-
-
-        DomManipulation.renderPosts(postList, postContainer, skip)
-        skip = 10;
-        //
-        // await API.fetchPostComments(commentsList, 1);
-        // const comm = createEl("div");
-        // commentsList.forEach(element => {
-        //     comm.appendChild(DomManipulation.commentHTML(element));
-        // })
-        // byID("cunt").appendChild(comm);
-
+    clear(postContainer);
+    postList=[];
+    skip = 0;
+    await API.fetchPosts(postList,skip);
+    for (const element of postList){
+        element.post.user = await API.fetchSpecificUser(element.post.user);
+        await API.fetchPostComments(element.post.comments, element.post.id);
     }
+    console.log(postList[0]);
+    DomManipulation.renderPosts(postList, postContainer, skip);
+    skip = 10;
 
     postContainer.onclick = async (event) => {
         const spanUser = event.target.closest("span");
@@ -72,6 +55,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     fetchPosts.onclick = async () => {
         await API.fetchPosts(postList, skip);
+        //await API.fetchPosts(postList,skip);
+        for (const element of postList){
+            element.post.user = await API.fetchSpecificUser(element.post.user);
+            await API.fetchPostComments(element.post.comments, element.post.id);
+        }
         DomManipulation.renderPosts(postList, postContainer, skip);
         skip+=10;
 
