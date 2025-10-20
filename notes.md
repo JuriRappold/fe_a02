@@ -28,4 +28,15 @@ returns:
 [Posts](https://dummyjson.com/posts?limit=10)<br>
 [Comments](https://dummyjson.com/comments?limit=10)<br>
 [Users](https://dummyjson.com/users?limit=10)<br>
+
+# for-loop delay
+```javascript
+for (const element of postList){
+    const user = await API.fetchSpecificUser(element.post.user);
+    element.post.user = user
+    //userList.push({user.username: user})
+    await API.fetchPostComments(element.post.comments, element.post.id);
+}
+```
+- The for-loop occupies the thread, therefore blocking the execution & rendering of posts
     

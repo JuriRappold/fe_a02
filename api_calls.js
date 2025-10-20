@@ -1,11 +1,13 @@
 import Factory from "./factory.js";
+const BASE = "https://dummyjson.com/";
+
 export default class API{
     // For posts:
     //call to get posts
     //don't need skip parameter anymore, but if I want to, I can specify
-    static async fetchPosts(list = [], skip = 0, userIdList=[]){
+    static async fetchPosts(list = [], skip = 0, userIdList=[], postIdList = []){
         if(Number.isInteger(skip) && skip >=0){
-            const API_posts = `https://dummyjson.com/posts?limit=10&skip=${encodeURIComponent(skip)}`;
+            const API_posts = `${BASE}posts?limit=10&skip=${encodeURIComponent(skip)}`;
             await fetch(API_posts)
                 .then(response => {
                     if(!response.ok){
@@ -22,8 +24,9 @@ export default class API{
                     //     list.push(postElement);//element obj
                     // }
                     data.posts.forEach(element =>{
-                        list.push(Factory.post(element));
+                        list.push(element);//Factory.post(element)
                         //userIdList.push(element.userId);
+                        //postIdList.push(element.id);
                     })
                 })
                 .catch(err => {
@@ -38,7 +41,7 @@ export default class API{
     static async fetchSpecificUser(userId){
         let usr = "";
         if(userId){
-            const API_usr = `https://dummyjson.com/users/${encodeURIComponent(userId)}?&select=username,firstName,lastName,email,address`;
+            const API_usr = `${BASE}users/${encodeURIComponent(userId)}?&select=username,firstName,lastName,email,address`;
             await fetch(API_usr)
                 .then(response => {
                     if(!response.ok){
@@ -47,6 +50,7 @@ export default class API{
                     return response.json();
                 })
                 .then(data =>{
+                    //console.log(data)
                     //console.log(data)
                     usr = Factory.user(data);
                 })
@@ -59,7 +63,8 @@ export default class API{
 
     //call to fetch comments of a post
     static async fetchPostComments(list = [], postId){
-        const API_comments = `https://dummyjson.com/posts/${encodeURIComponent(postId)}/comments`;
+        const postComments = []
+        const API_comments = `${BASE}posts/${encodeURIComponent(postId)}/comments`;
         await fetch(API_comments)
             .then(response => {
                 if(!response.ok){
@@ -72,12 +77,15 @@ export default class API{
                 //     list.push(Factory.comment(element));
                 // }
                 data.comments.forEach(element => {
-                    list.push(Factory.comment(element));
+                    const factEl = Factory.comment(element)
+                    postComments.push(factEl);
+                    list.push(factEl);
                 })
             })
             .catch(err => {
                 console.error(err);
             });
+        return postComments;
     }
 
 }

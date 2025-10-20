@@ -2,6 +2,7 @@
 
 export default class Factory{
     static post(posti){
+        //console.log(posti.reaction);
         return {
             post: {
                 title: posti.title,
@@ -22,8 +23,9 @@ export default class Factory{
                 name: `${user.firstName} ${user.lastName}`,
                 username: user.username,
                 email: user.email,
-                address: `${user.address.address}, ${user.address.city} ${user.address.postalCode}, ${user.address.state} ${user.address.country}`,
+                address: user.address.address.city,//`${user.address.address}, ${user.address.city} ${user.address.postalCode}, ${user.address.state} ${user.address.country}`,
                 eyeColor: user.eyeColor,
+                modalText: `Username: ${user.username}\nEmail: ${user.email}\nAddress: ${user.address.city}\nEye Color: ${user.eyeColor}`,
             }
         }
     }

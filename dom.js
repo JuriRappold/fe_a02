@@ -29,18 +29,25 @@ export default class DomManipulation{
             post.comments.forEach(element => {
             commentSection.appendChild(this.commentHTML(element));
             })
+            usrName.innerText = post.user.user.username;
         } else{
             commentSection.innerText = "No comments Yet! Be the first to comment!"
+            if(typeof post.user === "object"){
+                usrName.innerText = post.user.user.username;
+            } else {
+                usrName.innerText = post.user;
+            }
         }
+        //commentSection.innerText = "Comments...";
 
 
 
         //assigning value to html elements
         //console.log(post.user.user.name);
-        usrName.innerText = post.user.user.username;//`${post.user.firstName} ${post.user.lastName}`//post.user;//name;//to be switched w/ actual usrname
+        //post.user.user.username;//`${post.user.firstName} ${post.user.lastName}`//post.user;//name;//to be switched w/ actual usrname
         title.innerText = post.title;
         body.innerText = post.body;
-        reaction.innerText = `Likes: ${post.reaction["likes"]}; Dislikes: ${post.reaction["dislikes"]};`;
+        reaction.innerText = `Likes: ${post.reaction.likes}; Dislikes: ${post.reaction.dislikes};`;
         postId.innerText = `post id: ${post.id}`;
 
         //putting it all together
@@ -62,10 +69,13 @@ export default class DomManipulation{
         modally.classList.toggle("modally");
         const header = this.createEl("h3");
         const body = this.createEl("p");
+        const btn = this.createEl("button")
 
         header.innerText = user.name;
         body.innerText = `Email: ${user.email}\nAddress: ${user.address}\nEye Color: ${user.eyeColor}`
+        btn.innerText = "X";
 
+        modally.appendChild(btn);
         modally.appendChild(header);
         modally.appendChild(body);
 
@@ -103,6 +113,7 @@ export default class DomManipulation{
         })
 
         container.appendChild(fragment)
-
     }
+
+
 }
