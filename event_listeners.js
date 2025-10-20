@@ -9,6 +9,7 @@ const createEl = (el) => document.createElement(el);
 
 const postContainer = byID("container")
 const fetchPosts = byID("fetchPosts");
+const modal = byID("modal");
 
 let postList = []
 let userList = []
@@ -56,8 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         counter.innerText = num;
 
         //actual code:
-        const modal = byID("modal_container");
-        modal.classList.toggle("checked");
+        modal.classList.toggle("show");
         modal.innerText = `Hello There ${counter.innerText}`
 
 

@@ -115,27 +115,23 @@ a:hover {
     border: 1px solid purple;
 }
 /* Post Page: Modal */
-#modal{
+.modal{
     position: fixed;
-    left: 20%;
-    top: 10%;
-    transform: translate(50%, 50%) scale(0.96);
+    left: 50%;
+    top: 50%;
+    /*transform: translate(50%, 50%) scale(0.96);*/
     border-radius: 1rem;
     background-color: #eeeeee;
     padding: 1rem 1.25rem 1.25rem 0;
     min-width: 300px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    transition: opacity 240ms ease, transform 240ms cubic-bezier(.2, .8, .2, 1);
+    /*transition: opacity 240ms ease, transform 240ms cubic-bezier(.2, .8, .2, 1);*/
+    display: none;
 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
 }
-#modal .clicked{
-    position: fixed;
-    inset: 0;
-    background-color: grey;
-    transition: opacity 220ms ease;
+.show{
+    display: block;
+    /*flex-direction: column;*/
 }
 
 
