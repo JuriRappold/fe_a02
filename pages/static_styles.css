@@ -126,11 +126,16 @@ a:hover {
     min-width: 300px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     transition: opacity 240ms ease, transform 240ms cubic-bezier(.2, .8, .2, 1);
-    opacity: 0;
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+#modal .clicked{
+    position: fixed;
+    inset: 0;
+    background-color: grey;
+    transition: opacity 220ms ease;
 }
 
 

@@ -25,7 +25,7 @@ export default class DomManipulation{
 
         const commentSection = this.createEl("div")
         commentSection.classList.toggle("commentSection")
-        if(post.comments){
+        if(post.comments.length > 0){
             post.comments.forEach(element => {
             commentSection.appendChild(this.commentHTML(element));
             })
