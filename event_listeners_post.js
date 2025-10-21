@@ -61,7 +61,6 @@ async function fetchUserAndComments(listPost = [], listUser = [], listComments =
 //     //
 //     // })
 // }
-
 async function totalFetch(){
     await fetchAndRenderPosts(skip);
     await fetchUserAndComments(postList, userList, commentsList);
@@ -105,7 +104,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         await totalFetch();
         skip = 10;
     }
-
 
     postContainer.onclick = async (event) => {
         const spanUser = event.target.closest("span");
