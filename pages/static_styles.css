@@ -117,8 +117,8 @@ a:hover {
 /* Post Page: Modal */
 .modal{
     position: fixed;
-    left: 50%;
-    top: 50%;
+    left: 35%;
+    top: 35%;
     /*transform: translate(50%, 50%) scale(0.96);*/
     border-radius: 1rem;
     background-color: #eeeeee;
@@ -172,6 +172,9 @@ fieldset{
     border-top: 1px solid black;
     color: var(--muted);
     margin-top: 2rem;
+}
+#fetchPosts{
+    margin-top: 15px;
 }
 
 

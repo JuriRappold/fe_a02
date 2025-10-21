@@ -41,7 +41,7 @@ export default class API{
     static async fetchSpecificUser(userId){
         let usr = "";
         if(userId){
-            const API_usr = `${BASE}users/${encodeURIComponent(userId)}?&select=username,firstName,lastName,email,address`;
+            const API_usr = `${BASE}users/${encodeURIComponent(userId)}?&select=username,firstName,lastName,email,address,eyeColor`;
             await fetch(API_usr)
                 .then(response => {
                     if(!response.ok){

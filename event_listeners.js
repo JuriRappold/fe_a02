@@ -18,7 +18,7 @@ let skip = 0;
 let userPostDictionary = {};
 let commentsPostDictionary = {}
 
-async function firstFetchAndRenderPosts(skip){
+async function fetchAndRenderPosts(skip){
     await API.fetchPosts(postList,skip, userList, commentsList);//pushes json objects, userId, postId
         // for (const element of postList){
         //     const user = await API.fetchSpecificUser(element.post.user);
@@ -28,20 +28,21 @@ async function firstFetchAndRenderPosts(skip){
         // }
 
         // console.log(postList)
-        postList.forEach((item, i) => {
-            postList[i] = Factory.post(item);
-        })
+    postList.forEach((item, i) => {
+        postList[i] = Factory.post(item);
+        console.log(postList[i]);
+    })
 
         //await fetchUserAndComments(postList, userList, commentsList);
         DomManipulation.renderPosts(postList, postContainer, skip);
 }
 async function fetchUserAndComments(listPost = [], listUser = [], listComments = []){
+    console.log(listPost);
     for (const element of listPost) {
+        console.log(`Element.post.user: ${element.post.user}`);
         const user = await API.fetchSpecificUser(element.post.user);
-        //console.log(user)
         //console.log(user);
         userPostDictionary[user.user.username] = user;
-        //console.log()
         commentsPostDictionary[element.post.id] = await  API.fetchPostComments(listComments, element.post.id);
         element.post.user = userPostDictionary[user.user.username];
         element.post.comments = commentsPostDictionary[element.post.id];
@@ -62,11 +63,37 @@ async function fetchUserAndComments(listPost = [], listUser = [], listComments =
 // }
 
 async function totalFetch(){
-    await firstFetchAndRenderPosts(skip);
+    await fetchAndRenderPosts(skip);
     await fetchUserAndComments(postList, userList, commentsList);
     //updatePostObj(postList)
     clear(postContainer);
     DomManipulation.renderPosts(postList,postContainer,skip)
+}
+
+async function nextFetch(skip, list){
+    await API.fetchPosts(list,skip)
+    for (let index = skip; index<list.length; index++){
+        const json = list[index];
+        list[index] = Factory.post(json)
+    }
+    //DomManipulation.renderPosts(list, postContainer, skip);
+}
+async function nextUserComments(skip ,list){
+    const tempCommList = []
+    for (let index = skip; index<list.length; index++){
+        const user = await API.fetchSpecificUser(list[index].post.user)
+        userPostDictionary[user.user.username] = user;
+        commentsPostDictionary[list[index].post.id] = await API.fetchPostComments(tempCommList, list[index].post.id)
+        list[index].post.user = user;
+        list[index].post.comments = commentsPostDictionary[list[index].post.id];
+    }
+    //DomManipulation.renderPosts(list, postContainer, skip);
+}
+async function nextCombine(skip,list){
+    await nextFetch(skip, list);
+    await nextUserComments(skip, list);
+    //clear(postContainer);
+    DomManipulation.renderPosts(list, postContainer, skip);
 }
 
 
@@ -77,12 +104,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         skip = 0;
         await totalFetch();
         skip = 10;
-        // postList.forEach(element => {
-        //     console.log(element.post.user.user.username)
-        //     console.log(element.post.user);
-        //
-        // })
-        //console.log(userPostDictionary)
     }
 
 
@@ -91,12 +112,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         if(!spanUser) return;
         if(spanUser.className === "usrName"){
             //to check if it works:
-            const counter =byID("counter");
-            let num = Number(counter.innerText);
-            num++;
-            counter.innerText = num;
+            // const counter =byID("counter");
+            // let num = Number(counter.innerText);
+            // num++;
+            // counter.innerText = num;
 
             //actual code:
+            clear(modal)
             const userName = spanUser.innerText;
             //console.log(userPostDictionary[userName])
             modal.appendChild(DomManipulation.modalHTML(userPostDictionary[userName]));
@@ -105,18 +127,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-
-    fetchPosts.onclick = async () => {
-        await totalFetch();
-        skip+=10;
-
-    }
     modal.onclick = (event) => {
         const btn = event.target.closest("button");
         if(!btn)return;
         if(btn.innerText === "X"){
             modal.classList.toggle("show");
+            clear(modal)
         }
     }
+
+    fetchPosts.onclick = async () => {
+        // await nextFetch(skip, postList);
+        // await nextUserComments(skip, postList);
+        await nextCombine(skip, postList);
+        console.log(postList)
+        skip+=10;
+    }
+
 
 })
