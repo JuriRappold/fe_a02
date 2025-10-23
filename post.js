@@ -73,6 +73,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.log(postList)
         skip+=10;
     }
-
-
 })

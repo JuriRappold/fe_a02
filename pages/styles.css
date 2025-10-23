@@ -90,8 +90,8 @@ a:hover {
 .post{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: start;
+    align-items: start;
     padding: 5px;
     border: 1px solid black;
     border-radius: .5rem;
@@ -106,8 +106,14 @@ a:hover {
     height: auto;
 }
 
+.postBody{
+    align-self: center;
+    text-wrap: wrap;
+}
+
 .container{
     display: grid;
+    grid-template-columns: 1fr;
     gap: 3rem;
 }
 
@@ -186,14 +192,14 @@ fieldset{
 
 /* Media queries/Breakpoints */
 
-@media (min-width: 32rem) {
-    .container{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-}
+/*@media (min-width: 512px) {*/
+/*    .container{*/
+/*        display: grid;*/
+/*        grid-template-columns: 1fr 1fr;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 64rem) {
+@media (min-width: 1024px) {
     .container{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
