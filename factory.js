@@ -1,8 +1,6 @@
-//import API from "./api_calls.js";
-
 export default class Factory{
+
     static post(posti){
-        //console.log(posti.reaction);
         return {
             post: {
                 title: posti.title,

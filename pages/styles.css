@@ -112,26 +112,31 @@ a:hover {
 }
 
 .comment{
-    border: 1px solid purple;
+    border: 2px solid purple;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: .75rem;
+    background-color: #CBC3E3;
+}
+.usrName{
+    color: var(--muted)
 }
 /* Post Page: Modal */
 .modal{
     position: fixed;
     left: 35%;
     top: 35%;
-    /*transform: translate(50%, 50%) scale(0.96);*/
     border-radius: 1rem;
-    background-color: #eeeeee;
-    padding: 1rem 1.25rem 1.25rem 0;
+    border: 3px solid black;
+    background-color: var(--surface);
+    padding: 15px;
     min-width: 300px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    /*transition: opacity 240ms ease, transform 240ms cubic-bezier(.2, .8, .2, 1);*/
+    transition: opacity 240ms ease, transform 240ms cubic-bezier(.2, .8, .2, 1);
     display: none;
-
 }
 .show{
     display: block;
-    /*flex-direction: column;*/
 }
 
 

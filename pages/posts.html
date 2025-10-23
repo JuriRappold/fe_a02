@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Posts</title>
-    <link rel="stylesheet" href="./static_styles.css" type="text/css">
-<!--    <link rel="stylesheet" href="./dynamic_styles.css" type="text/css">-->
-<!--    <script src="../html_factories.js" type="module"></script>-->
-    <script src="../event_listeners_post.js" type="module"></script>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script src="../post.js" type="module"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -24,15 +22,11 @@
     </header>
 
     <main class="main posts safe">
-        <section class="container" id="container">
-        </section>
-        <div class="modal" id="modal" role="dialog">
-        </div>
-        <button id="fetchPosts">Fetch Posts</button>
-        <pre id="cunt"></pre>
+        <section class="container" id="container"></section>
 
-<!--        <button id="testing">Fetch Users</button>-->
-<!--        <pre id="testing_pre"></pre>-->
+        <div class="modal" id="modal" role="dialog"></div>
+
+        <button id="fetchPosts">Fetch Posts</button>
     </main>
 
     <footer class="site_footer">

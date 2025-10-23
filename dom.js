@@ -38,16 +38,9 @@ export default class DomManipulation{
                 usrName.innerText = post.user;
             }
         }
-        //commentSection.innerText = "Comments...";
-
-
-
-        //assigning value to html elements
-        //console.log(post.user.user.name);
-        //post.user.user.username;//`${post.user.firstName} ${post.user.lastName}`//post.user;//name;//to be switched w/ actual usrname
         title.innerText = post.title;
         body.innerText = post.body;
-        reaction.innerText = `Likes: ${post.reaction.likes}; Dislikes: ${post.reaction.dislikes};`;
+        reaction.innerText = `👍: ${post.reaction.likes}; 👎: ${post.reaction.dislikes};`;
         postId.innerText = `post id: ${post.id}`;
 
         //putting it all together
@@ -93,7 +86,7 @@ export default class DomManipulation{
 
         username.innerText = comment.user.username;
         body.innerText = comment.body;
-        likes.innerText = `Likes: ${comment.likes}`;
+        likes.innerText = `👍: ${comment.likes}`;
 
         div.appendChild(username);
         div.appendChild(body);
