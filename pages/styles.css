@@ -172,6 +172,23 @@ fieldset{
     justify-self: center;
     align-self: center;
 }
+.submit{
+    background-color: var(--surface);
+    border: var(--muted);
+    color: var(--muted);
+
+}
+
+.checked{
+    color: black;
+    background-color: grey;
+    border: black
+}
+
+#error, #check_missing{
+    font-size: 13px;
+    color: red;
+}
 
 
 /* Site footer */
@@ -186,6 +203,7 @@ fieldset{
 }
 #fetchPosts{
     margin-top: 15px;
+    justify-self: center;
 }
 
 

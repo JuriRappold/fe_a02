@@ -39,4 +39,14 @@ export default class Factory{
             }
         }
     }
+
+    static form(name, email, info){
+        return{
+            submission:{
+                name: name,
+                email: email,
+                info: info
+            }
+        }
+    }
 }
