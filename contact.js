@@ -17,10 +17,12 @@ const checkMissing = byID("check_missing");
 // validating inputs
 
 //returns true if there are numbers, returns false if there are no numbers
-const hasNumbers = /\d/g; //works as intended
+//removed the g modifier, as it somehow interferes with the check
+//https://stackoverflow.com/questions/13233654/javascript-regular-expression-is-working-fine-first-time-but-not-second-time-wo
+const hasNumbers = /\d/; //works as intended
 
-const hasAtSymbol = /@/g; //works as intended
-const hasPeriod = /\./g; //works as intended
+const hasAtSymbol = /@/; //works as intended
+const hasPeriod = /\./; //works as intended
 
 function checkNameNoNumbers(name){
     return !hasNumbers.test(name);
@@ -44,7 +46,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             const name = formName.value
             const email = formEmail.value
             const info = formInfo.value
-            if( checkNameNoNumbers(name)){
+            console.log(email);
+            if(checkNameNoNumbers(name)){
                 if(checkEmail(email)){
                     console.log(Factory.form(name, email, info));
                 }
