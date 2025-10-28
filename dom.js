@@ -23,6 +23,23 @@ export default class DomManipulation{
         const postId = this.createEl("div")
         postId.classList.toggle("postID");
 
+        const tagList = []
+        if(post.tags){
+            post.tags.forEach(tag => {
+                const tagEl = this.createEl("div");
+                tagEl.innerText = `#${tag}`;
+                tagEl.classList.add("tag")
+                tagList.push(tagEl)
+            })
+        }
+        const tagContainer = this.createEl("p")
+        tagContainer.classList.add("tagContainer")
+        tagList.forEach(tag => {
+            tagContainer.appendChild(tag);
+        })
+
+
+
         const commentSection = this.createEl("div")
         commentSection.classList.toggle("commentSection")
         if(post.comments.length > 0){
@@ -32,6 +49,7 @@ export default class DomManipulation{
             usrName.innerText = post.user.user.username;
         } else{
             commentSection.innerText = "No comments Yet! Be the first to comment!"
+            commentSection.classList.add("empty")
             if(typeof post.user === "object"){
                 usrName.innerText = post.user.user.username;
             } else {
@@ -51,6 +69,7 @@ export default class DomManipulation{
         article.appendChild(title);
         article.appendChild(body);
         article.appendChild(div);
+        article.appendChild(tagContainer);
         article.appendChild(commentSection);
 
         return article;

@@ -124,6 +124,30 @@ a:hover {
     border-radius: .75rem;
     background-color: #CBC3E3;
 }
+.commentSection{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    justify-content: space-evenly;
+}
+.empty{
+    color: var(--muted);
+}
+.tag{
+    border: 1px dashed lightsalmon;
+    border-radius: .75rem;
+    color: orange;
+    padding: 2px;
+}
+.tagContainer{
+    background-color: #eeee;
+    border: 1px solid black;
+    border-radius: .75rem;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2rem;
+    padding: 10px;
+}
 .usrName{
     color: var(--muted)
 }
